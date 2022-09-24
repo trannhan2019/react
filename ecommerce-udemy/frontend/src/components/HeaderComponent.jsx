@@ -21,7 +21,6 @@ const HeaderComponent = () => {
         <LinkContainer to="/">
           <Navbar.Brand href="/">BEST ONLINE SHOP</Navbar.Brand>
         </LinkContainer>
-
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -35,7 +34,6 @@ const HeaderComponent = () => {
                 type="text"
                 placeholder="Search in shop ..."
               />
-
               <Button variant="warning">
                 <i className="bi bi-search text-dark"></i>
               </Button>
@@ -48,6 +46,7 @@ const HeaderComponent = () => {
                 <span className="position-absolute top-1 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
               </Nav.Link>
             </LinkContainer>
+
             <NavDropdown
               title="John Doe"
               id="collasible-nav-dropdown"
