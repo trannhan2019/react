@@ -7,11 +7,14 @@ const userRoute = require('./routes/userRoute');
 
 const errorHandler = require('./middleware/errorMiddleware');
 
+// Import cookie parser
+const cookieParser = require('cookie-parser');
+
 const app = express();
 
 // Middleware
 app.use(express.json());
-
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
