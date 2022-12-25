@@ -1,0 +1,17 @@
+.home{
+    background-color: #030b6b;
+    min-height: 100vh;
+    & nav{
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+    .home-links {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & > * {
+          margin-left: 1rem;
+          color: #fff;
+        }
+    }
+}
