@@ -59,10 +59,11 @@ const Register = () => {
     setIsLoading(true);
     try {
       const data = await registerUser(userData);
+      console.log('data', data);
       await dispatch(SET_LOGIN(true));
       await dispatch(SET_NAME(data.name));
-      //   navigate('/dashboard');
-      navigate('/home');
+      navigate('/dashboard');
+      // navigate('/home');
 
       setIsLoading(false);
     } catch (error) {

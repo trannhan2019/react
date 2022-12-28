@@ -19,7 +19,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Fix Cors
-app.use(cors());
+app.use(
+  cors({
+    origin: [`${process.env.CLIENT_URL}`],
+    credentials: true,
+  })
+);
 
 // Routes Middleware
 app.use('/api/users', userRoute);
