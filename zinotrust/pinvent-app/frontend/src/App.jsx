@@ -15,6 +15,13 @@ import Home from './pages/home/Home';
 import { SET_LOGIN } from './redux/features/auth/authSlice';
 import { getLoginStatus } from './services/authService';
 import Reset from './pages/auth/Reset';
+import AddProduct from './pages/addProduct/AddProduct';
+import ProductDetail from './components/product/productDetail/ProductDetail';
+import EditProduct from './pages/editProduct/EditProduct';
+import Profile from './pages/profile/Profile';
+import ProfileUpdate from './pages/profile/ProfileUpdate';
+import Contact from './pages/contact/Contact';
+import NotFound from './pages/notFound/NotFound';
 
 axios.defaults.withCredentials = true;
 export const SERVER_URL = 'http://localhost:5000';
@@ -53,6 +60,72 @@ function App() {
             </Sidebar>
           }
         />
+
+        <Route
+          path="add-product"
+          element={
+            <Sidebar>
+              <Layout>
+                <AddProduct />
+              </Layout>
+            </Sidebar>
+          }
+        />
+
+        <Route
+          path="/product-detail/:id"
+          element={
+            <Sidebar>
+              <Layout>
+                <ProductDetail />
+              </Layout>
+            </Sidebar>
+          }
+        />
+
+        <Route
+          path="/edit-product/:id"
+          element={
+            <Sidebar>
+              <Layout>
+                <EditProduct />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Sidebar>
+              <Layout>
+                <Profile />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/profile-update"
+          element={
+            <Sidebar>
+              <Layout>
+                <ProfileUpdate />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/contact-us"
+          element={
+            <Sidebar>
+              <Layout>
+                <Contact />
+              </Layout>
+            </Sidebar>
+          }
+        />
+
+        {/* 404 Page */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
