@@ -1,12 +1,9 @@
-import { axiosInstance } from '.';
+import { axiosInstance } from ".";
 
 // Register a new user
 export const RegisterUser = async (payload) => {
   try {
-    const response = await axiosInstance.post(
-      '/api/users/register',
-      payload
-    );
+    const response = await axiosInstance.post("/api/users/register", payload);
     return response.data;
   } catch (error) {
     throw error || error.response.data;
@@ -17,10 +14,7 @@ export const RegisterUser = async (payload) => {
 
 export const LoginUser = async (payload) => {
   try {
-    const response = await axiosInstance.post(
-      '/api/users/login',
-      payload
-    );
+    const response = await axiosInstance.post("/api/users/login", payload);
     return response.data;
   } catch (error) {
     throw error || error.response.data;
@@ -31,7 +25,7 @@ export const LoginUser = async (payload) => {
 
 export const GetUser = async () => {
   try {
-    const response = await axiosInstance.get('/api/users/getuser');
+    const response = await axiosInstance.get("/api/users/getuser");
     return response.data;
   } catch (error) {
     throw error || error.response.data;
@@ -42,12 +36,9 @@ export const GetUser = async () => {
 
 export const SearchUsers = async (searchText) => {
   try {
-    const response = await axiosInstance.post(
-      `/api/users/search-users`,
-      {
-        searchText,
-      }
-    );
+    const response = await axiosInstance.post(`/api/users/search-users`, {
+      searchText,
+    });
     return response.data;
   } catch (error) {
     throw error || error.response.data;

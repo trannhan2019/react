@@ -1,3 +1,5 @@
+import React from "react";
+
 function Loader() {
   return (
     <div className="bg-black flex items-center justify-center opacity-70 absolute inset-0 z-[10000]">

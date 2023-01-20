@@ -1,10 +1,10 @@
-import { axiosInstance } from '.';
+import { axiosInstance } from ".";
 
 // Like a blog
 export const LikeBlog = async (payload) => {
   try {
     const response = await axiosInstance.post(
-      '/api/blog-actions/like-blog',
+      "/api/blog-actions/like-blog",
       payload
     );
     return response.data;
@@ -17,7 +17,7 @@ export const LikeBlog = async (payload) => {
 export const UnlikeBlog = async (payload) => {
   try {
     const response = await axiosInstance.post(
-      '/api/blog-actions/unlike-blog',
+      "/api/blog-actions/unlike-blog",
       payload
     );
     return response.data;
@@ -42,7 +42,7 @@ export const GetAllLikesOfBlog = async (id) => {
 export const AddComment = async (payload) => {
   try {
     const response = await axiosInstance.post(
-      '/api/blog-actions/add-comment',
+      "/api/blog-actions/add-comment",
       payload
     );
     return response.data;
@@ -67,7 +67,7 @@ export const GetAllCommentsOfBlog = async (id) => {
 export const DeleteComment = async (payload) => {
   try {
     const response = await axiosInstance.post(
-      '/api/blog-actions/delete-comment',
+      "/api/blog-actions/delete-comment",
       payload
     );
     return response.data;
@@ -80,11 +80,12 @@ export const DeleteComment = async (payload) => {
 export const ShareBlog = async (payload) => {
   try {
     const response = await axiosInstance.post(
-      '/api/blog-actions/share-blog',
+      "/api/blog-actions/share-blog",
       payload
     );
     return response.data;
   } catch (error) {
     return error.response.data;
   }
-};
+}
+

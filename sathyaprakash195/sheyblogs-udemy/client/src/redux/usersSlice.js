@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const usersSlice = createSlice({
-  name: 'users',
+  name: "users",
   initialState: {
     currentUser: null,
     users: [],
@@ -31,11 +31,6 @@ const usersSlice = createSlice({
   },
 });
 
-export const {
-  SetCurrentUser,
-  SetAllUsers,
-  SetNotifications,
-  SetSocket,
-  SetUnreadCount,
-} = usersSlice.actions;
+export const { SetCurrentUser, SetAllUsers, SetNotifications, SetSocket , SetUnreadCount} =
+  usersSlice.actions;
 export default usersSlice.reducer;

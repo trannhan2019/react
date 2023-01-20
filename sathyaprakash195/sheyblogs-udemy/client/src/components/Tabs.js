@@ -1,3 +1,5 @@
+import React from "react";
+
 function Tabs({ tabs, activeTab, setActiveTab }) {
   return (
     <div>
@@ -7,12 +9,8 @@ function Tabs({ tabs, activeTab, setActiveTab }) {
             key={tab}
             onClick={() => setActiveTab(index)}
             className={`p-2  cursor-pointer rounded-t-lg
-               ${
-                 activeTab === index
-                   ? 'bg-primary text-white'
-                   : 'bg-gray-200 '
-               }
-              `}
+             ${activeTab === index ? "bg-primary text-white" : "bg-gray-200 "}
+            `}
           >
             {tab.name}
           </div>

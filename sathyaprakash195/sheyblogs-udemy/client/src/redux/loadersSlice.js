@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const loadersSlice = createSlice({
-  name: 'loaders',
+  name: "loaders",
   initialState: {
     loading: false,
   },

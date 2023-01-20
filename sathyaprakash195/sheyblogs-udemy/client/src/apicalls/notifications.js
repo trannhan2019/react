@@ -1,4 +1,4 @@
-import { axiosInstance } from '.';
+const { axiosInstance } = require(".");
 
 // get all notifications of a user
 
