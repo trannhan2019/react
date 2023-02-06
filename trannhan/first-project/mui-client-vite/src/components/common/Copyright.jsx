@@ -1,12 +1,10 @@
-import { Link, Typography } from '@mui/material'
-import React from 'react'
+import { Link, Typography } from "@mui/material";
 
-export default function Copyright() {
+export default function Copyright(props) {
   return (
-    <Typography align='center'>
-        {'Copyright © '}
-        <Link>trannhan.com</Link>
-        {new Date().getFullYear()}
+    <Typography align="center" variant="body2" {...props}>
+      {"Copyright © "}
+      <Link>trannhan.com</Link> {new Date().getFullYear()}
     </Typography>
-  )
+  );
 }
