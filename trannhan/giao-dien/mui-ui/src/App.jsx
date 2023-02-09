@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import theme from "./configs/theme.configs";
 import SigninSimple from "./pages/SigninSimple";
 import SignInSide from "./pages/SignInSide";
+import AlbumPage from "./pages/AlbumPage";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/signin" element={<SigninSimple />} />
           <Route path="/signin-slide" element={<SignInSide />} />
+          <Route path="/album" element={<AlbumPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
