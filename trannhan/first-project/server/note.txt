@@ -1,2 +1,0 @@
-- su dung type modules trong file packages.json de import export es 6
-- neu qua trinh co loi thi dung babel config de dung dong thoi require va import
