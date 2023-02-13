@@ -1,23 +1,6 @@
 import { Avatar, Grid, Link, Typography, Paper, Box } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import FooterCopyright from "../common/FooterCopyright";
 
 export default function AuthLayout({ heading, children }) {
   return (
@@ -53,7 +36,7 @@ export default function AuthLayout({ heading, children }) {
           </Typography>
           {children}
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <FooterCopyright sx={{ mt: 5 }} />
       </Grid>
     </Grid>
   );

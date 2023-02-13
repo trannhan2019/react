@@ -9,6 +9,9 @@ import HomePage from "./pages/HomePage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import AuthLayout from "./components/layouts/AuthLayout";
+import AdminLayout from "./components/layouts/AdminLayout";
+import Dashboard from "./pages/Dashboard";
+import AdminProtect from "./components/common/AdminProtect";
 
 function App() {
   return (
@@ -42,6 +45,16 @@ function App() {
               </AuthLayout>
             }
           />
+          <Route
+            path="/admin"
+            element={
+              <AdminProtect>
+                <AdminLayout />
+              </AdminProtect>
+            }
+          >
+            <Route index element={<Dashboard />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

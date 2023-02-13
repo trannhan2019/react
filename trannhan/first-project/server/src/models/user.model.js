@@ -18,6 +18,11 @@ const userSchema = mongoose.Schema(
       required: [true, "Please add a password"],
       minLength: [7, "Password must be up to 7 characters"],
     },
+    photo: {
+      type: String,
+      required: [true, "Please add a photo"],
+      default: "https://i.ibb.co/4pDNDk1/avatar.png",
+    },
   },
   {
     timestamps: true,

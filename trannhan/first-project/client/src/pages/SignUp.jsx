@@ -14,12 +14,13 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import userApi from "../api/modules/user.api";
-import { setIsSignIn, setUser } from "../redux/features/userSlice";
+import { setUser } from "../redux/features/userSlice";
 
 export default function SignUp() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isLoginRequest, setIsLoginRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
@@ -52,8 +53,8 @@ export default function SignUp() {
       setIsLoginRequest(false);
       if (response) {
         signupForm.resetForm();
-        dispatch(setIsSignIn(true));
         dispatch(setUser(response));
+        navigate("/");
         toast.success("Sign in success");
       }
       if (error) setErrorMessage(error.message);

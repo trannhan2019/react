@@ -1,15 +1,17 @@
-import { Alert, Box, Button, Grid, Link, TextField } from "@mui/material";
+import { Alert, Box, Grid, Link, TextField } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import userApi from "../api/modules/user.api";
-import { setIsSignIn, setUser } from "../redux/features/userSlice";
+import { setUser } from "../redux/features/userSlice";
+import { LoadingButton } from "@mui/lab";
 
 export default function SignIn() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isLoginRequest, setIsLoginRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
@@ -30,8 +32,8 @@ export default function SignIn() {
       setIsLoginRequest(false);
       if (response) {
         signinForm.resetForm();
-        dispatch(setIsSignIn(true));
         dispatch(setUser(response));
+        navigate("/");
         toast.success("Sign in success");
       }
 
