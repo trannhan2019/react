@@ -1,9 +1,10 @@
 import publicClient from "../client/public.client";
+import privateClient from "../client/private.client";
 
 const userEndpoints = {
   signin: "user/signin",
   signup: "user/signup",
-  getInfo: "user/info",
+  getUser: "user/get-user",
   passwordUpdate: "user/update-password",
 };
 
@@ -31,6 +32,14 @@ const userApi = {
       return { response };
     } catch (error) {
       console.log(error);
+      return { error };
+    }
+  },
+  getUser: async () => {
+    try {
+      const response = await privateClient.get(userEndpoints.getUser);
+      return { response };
+    } catch (error) {
       return { error };
     }
   },
