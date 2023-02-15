@@ -50,4 +50,29 @@ const signin = () => {
   ];
 };
 
-export default { signup, signin };
+const updatePassword = () => {
+  return [
+    body("password")
+      .exists()
+      .withMessage("password is required")
+      .isLength({ min: 7 })
+      .withMessage("password minimum 7 characters"),
+    body("newPassword")
+      .exists()
+      .withMessage("newPassword is required")
+      .isLength({ min: 7 })
+      .withMessage("newPassword minimum 7 characters"),
+    body("confirmNewPassword")
+      .exists()
+      .withMessage("confirmNewPassword is required")
+      .isLength({ min: 7 })
+      .withMessage("confirmNewPassword minimum 7 characters")
+      .custom((value, { req }) => {
+        if (value !== req.body.newPassword)
+          throw new Error("confirmNewPassword not match");
+        return true;
+      }),
+  ];
+};
+
+export default { signup, signin, updatePassword };

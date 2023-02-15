@@ -32,7 +32,6 @@ const signup = async (req, res) => {
 const signin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email);
     const user = await userModel.findOne({ email });
     if (!user) return responseHandler.badrequest(res, "Wrong User or Password");
     if (!(await user.validPassword(password)))
@@ -48,7 +47,6 @@ const signin = async (req, res) => {
       id: user._id,
     });
   } catch (err) {
-    console.log(err);
     responseHandler.error(res);
   }
 };
@@ -63,4 +61,23 @@ const getUser = async (req, res) => {
   }
 };
 
-export default { signup, signin, getUser };
+const updatePassword = async (req, res) => {
+  try {
+    const { password, newPassword } = req.body;
+
+    const user = await userModel.findById(req.user.id).select("password _id");
+    if (!user) return responseHandler.unauthorize(res);
+
+    if (!(await user.validPassword(password)))
+      return responseHandler.badrequest(res, "Wrong password");
+
+    await user.setPassword(newPassword);
+    await user.save();
+
+    responseHandler.ok(res);
+  } catch {
+    responseHandler.error(res);
+  }
+};
+
+export default { signup, signin, getUser, updatePassword };

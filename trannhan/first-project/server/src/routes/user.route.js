@@ -20,6 +20,14 @@ router.post(
   userController.signin
 );
 
+router.put(
+  "/update-password",
+  tokenMiddleware.auth,
+  userValidate.updatePassword(),
+  requestHandler.validate,
+  userController.updatePassword
+);
+
 router.get("/get-user", tokenMiddleware.auth, userController.getUser);
 
 export default router;
