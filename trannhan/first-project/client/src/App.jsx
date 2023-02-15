@@ -2,8 +2,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { ToastContainer } from "react-toastify";
 import CssBaseline from "@mui/material/CssBaseline";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-// import { useEffect } from "react";
 
 import theme from "./configs/theme.config";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,10 +12,11 @@ import AuthLayout from "./components/layouts/AuthLayout";
 import AdminLayout from "./components/layouts/AdminLayout";
 import Dashboard from "./pages/Dashboard";
 import AuthProtect from "./components/common/AuthProtect";
-// import userApi from "./api/modules/user.api";
-// import { setUser } from "./redux/features/userSlice";
+import NotFound from "./pages/NotFound";
+import MyAccount from "./pages/MyAccount";
 
 function App() {
+  //ĐÃ SỬ DỤNG PERSIT-REDUX
   // const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -70,7 +69,10 @@ function App() {
             }
           >
             <Route index element={<Dashboard />} />
+            <Route path="my-account" element={<MyAccount />} />
           </Route>
+          {/* 404 Page */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

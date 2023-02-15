@@ -32,6 +32,7 @@ const signup = async (req, res) => {
 const signin = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(email);
     const user = await userModel.findOne({ email });
     if (!user) return responseHandler.badrequest(res, "Wrong User or Password");
     if (!(await user.validPassword(password)))
@@ -46,7 +47,8 @@ const signin = async (req, res) => {
       ...user._doc,
       id: user._id,
     });
-  } catch {
+  } catch (err) {
+    console.log(err);
     responseHandler.error(res);
   }
 };

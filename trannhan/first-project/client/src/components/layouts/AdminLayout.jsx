@@ -173,11 +173,9 @@ export default function AdminLayout() {
         }}
       >
         <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
-            <Outlet />
-          </Grid>
-        </Container>
+        <Grid container spacing={3} sx={{ padding: 2 }}>
+          <Outlet />
+        </Grid>
       </Box>
     </Box>
   );
