@@ -14,13 +14,32 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/features/userSlice";
 
-export default function ChangeInfoUserModal({ openInfo, handleCloseInfo }) {
+export default function ChangeInfoUserModal({
+  openInfo,
+  handleCloseInfo,
+  fullName,
+}) {
   // const [onRequest, setOnRequest] = useState(false);
   const dispatch = useDispatch();
 
   const form = useFormik({
-    initialValues: { fullName: "", photo: "" },
-    validationSchema: Yup.object({}),
+    initialValues: { fullName: fullName, photo: {} },
+    validationSchema: Yup.object({
+      fullName: Yup.string()
+        .min(7, "Full Name minimum 7 characters")
+        .required("Full Name is required"),
+      photo: Yup.mixed().test(
+        "type",
+        "Only the following formats are accepted: .jpeg, .jpg, .png",
+        (value) => {
+          return (
+            (value && value.type === "image/jpeg") ||
+            value.type === "image/bmp" ||
+            value.type === "image/png"
+          );
+        }
+      ),
+    }),
     onSubmit: async ({ fullName, photo }) => {
       const { response, error } = await userApi.updateInfo({ fullName, photo });
       if (error) toast.error(error.message);

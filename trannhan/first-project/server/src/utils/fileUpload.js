@@ -13,18 +13,18 @@ const storage = multer.diskStorage({
 });
 
 // Specify the type of files that can be saved
-// const fileFilter = (req, file, cb) => {
-//     if (
-//       file.mimetype === "image/png" ||
-//       file.mimetype === "image/jpg" ||
-//       file.mimetype === "image/jpeg"
-//     ) {
-//       cb(null, true);
-//     } else {
-//       cb(null, false);
-//     }
-//   };
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
 
-const upload = multer({ storage });
+const upload = multer({ storage, fileFilter });
 
 export default upload;

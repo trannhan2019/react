@@ -35,6 +35,7 @@ export default function MyAccount() {
       <ChangeInfoUserModal
         openInfo={openInfo}
         handleCloseInfo={handleCloseInfo}
+        fullName={user.fullName}
       />
       <ChangePasswordModal
         openPassword={openPassword}
@@ -47,7 +48,7 @@ export default function MyAccount() {
               <Grid item xs={12} md={4}>
                 <CardMedia
                   component="img"
-                  image={user?.photo}
+                  image={`http://localhost:5000/${user?.photo}`}
                   alt="Live from space album cover"
                 />
               </Grid>

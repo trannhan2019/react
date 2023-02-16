@@ -33,6 +33,8 @@ router.put(
   "/update-info",
   tokenMiddleware.auth,
   upload.single("photo"),
+  userValidate.updateInfo(),
+  requestHandler.validate,
   userController.updateInfo
 );
 

@@ -1,6 +1,7 @@
 import userModel from "../models/user.model.js";
 import jsonwebtoken from "jsonwebtoken";
 import responseHandler from "../handlers/response.handler.js";
+import { unlink } from "fs";
 
 const signup = async (req, res) => {
   try {
@@ -84,11 +85,16 @@ const updateInfo = async (req, res) => {
   try {
     const user = await userModel.findById(req.user.id).select("fullName photo");
     if (!user) return responseHandler.unauthorize(res);
+    if (req.file && user.photo) {
+      unlink(`public/uploads/users/${user.photo}`, (err) => {
+        if (err) throw err;
+      });
+    }
+    //set new fullname and new photo
     user.fullName = req.body.fullName;
     if (req.file)
-      user.photo = `${req.protocol}://${req.get("host")}/public/uploads/users/${
-        req.file.filename
-      }`;
+      // user.photo = `${req.protocol}://${req.get("host")}/${req.file.filename}`;
+      user.photo = `${req.file.filename}`;
 
     await user.save();
     //responseHandler.ok(res);

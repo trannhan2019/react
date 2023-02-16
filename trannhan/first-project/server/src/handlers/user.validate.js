@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, check } from "express-validator";
 import userModel from "../models/user.model.js";
 
 const signup = () => {
@@ -75,4 +75,28 @@ const updatePassword = () => {
   ];
 };
 
-export default { signup, signin, updatePassword };
+const updateInfo = () => {
+  return [
+    body("fullName")
+      .exists()
+      .withMessage("Full Name is required")
+      .isLength({ min: 7 })
+      .withMessage("Full Name minimum 7 characters"),
+    check("photo")
+      .custom((value, { req }) => {
+        if (!req.file) return true;
+        if (
+          req.file.mimetype === "image/png" ||
+          req.file.mimetype === "image/jpg" ||
+          req.file.mimetype === "image/jpeg"
+        ) {
+          return ".img";
+        } else {
+          return false;
+        }
+      })
+      .withMessage("Please only submit image type."),
+  ];
+};
+
+export default { signup, signin, updatePassword, updateInfo };

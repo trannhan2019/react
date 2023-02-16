@@ -4,7 +4,8 @@ import http from "http";
 import mongoose from "mongoose";
 import "dotenv/config";
 import routes from "./src/routes/index.js";
-const path = require("path");
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 
@@ -16,14 +17,11 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
-app.use(
-  "public/uploads",
-  express.static(path.join(__dirname, "public/uploads"))
-);
-// console.log(path.join(__dirname, "src/uploads/"));
-// app.use(express.static(path.join(__dirname, "uploads")));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+//https://expressjs.com/en/starter/static-files.html
+app.use(express.static(path.join(__dirname, "public/uploads/users")));
+// app.use("/static", express.static("public/uploads/users"));
 
 app.use("/api/", routes);
 
