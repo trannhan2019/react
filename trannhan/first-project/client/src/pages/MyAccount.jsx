@@ -12,6 +12,7 @@ import {
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ChangeInfoUserModal from "../components/common/ChangeInfoUserModal";
+import ChangeInfoUserModal2 from "../components/common/ChangeInfoUserModal2";
 import ChangePasswordModal from "../components/common/ChangePasswordModal";
 
 export default function MyAccount() {

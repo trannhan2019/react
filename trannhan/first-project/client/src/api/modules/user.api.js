@@ -1,11 +1,13 @@
 import publicClient from "../client/public.client";
 import privateClient from "../client/private.client";
+import fileClient from "../client/file.client";
 
 const userEndpoints = {
   signin: "user/signin",
   signup: "user/signup",
   getUser: "user/get-user",
   updatePassword: "user/update-password",
+  updateInfo: "user/update-info",
 };
 
 const userApi = {
@@ -50,6 +52,22 @@ const userApi = {
         newPassword,
         confirmNewPassword,
       });
+
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+  updateInfo: async ({ fullName, photo }) => {
+    try {
+      const formData = new FormData();
+      // const { fullName, photo } = values;
+      // for (let value in values) {
+      //   formData.append(value, values[value]);
+      // }
+      formData.append("fullName", fullName);
+      formData.append("photo", photo);
+      const response = await fileClient.put(userEndpoints.updateInfo, formData);
 
       return { response };
     } catch (error) {

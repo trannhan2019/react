@@ -3,6 +3,7 @@ import userController from "../controllers/user.controller.js";
 import requestHandler from "../handlers/request.handler.js";
 import userValidate from "../handlers/user.validate.js";
 import tokenMiddleware from "../middlewares/token.middleware.js";
+import upload from "../utils/fileUpload.js";
 
 const router = express.Router();
 
@@ -26,6 +27,13 @@ router.put(
   userValidate.updatePassword(),
   requestHandler.validate,
   userController.updatePassword
+);
+
+router.put(
+  "/update-info",
+  tokenMiddleware.auth,
+  upload.single("photo"),
+  userController.updateInfo
 );
 
 router.get("/get-user", tokenMiddleware.auth, userController.getUser);

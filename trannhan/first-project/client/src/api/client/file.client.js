@@ -3,23 +3,23 @@ import queryString from "query-string";
 
 const baseURL = "http://localhost:5000/api/";
 
-const privateClient = axios.create({
+const fileClient = axios.create({
   baseURL,
   paramsSerializer: { encode: (params) => queryString.stringify(params) },
 });
 
-privateClient.interceptors.request.use(async (config) => {
+fileClient.interceptors.request.use(async (config) => {
   return {
     ...config,
     headers: {
-      "Content-Type": "application/json",
-      // "Content-Type": "multipart/form-data",
+      // "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${localStorage.getItem("actkn")}`,
     },
   };
 });
 
-privateClient.interceptors.response.use(
+fileClient.interceptors.response.use(
   (response) => {
     if (response && response.data) return response.data;
     return response;
@@ -29,4 +29,4 @@ privateClient.interceptors.response.use(
   }
 );
 
-export default privateClient;
+export default fileClient;

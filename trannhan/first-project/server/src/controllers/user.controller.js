@@ -80,4 +80,31 @@ const updatePassword = async (req, res) => {
   }
 };
 
-export default { signup, signin, getUser, updatePassword };
+const updateInfo = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.user.id).select("fullName photo");
+    if (!user) return responseHandler.unauthorize(res);
+    user.fullName = req.body.fullName;
+    if (req.file)
+      user.photo = `${req.protocol}://${req.get("host")}/public/uploads/users/${
+        req.file.filename
+      }`;
+
+    await user.save();
+    //responseHandler.ok(res);
+    const token = jsonwebtoken.sign(
+      { data: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "24h" }
+    );
+    responseHandler.created(res, {
+      token,
+      ...user._doc,
+      id: user._id,
+    });
+  } catch {
+    responseHandler.error(res);
+  }
+};
+
+export default { signup, signin, getUser, updatePassword, updateInfo };

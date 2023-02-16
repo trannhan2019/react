@@ -4,6 +4,7 @@ import http from "http";
 import mongoose from "mongoose";
 import "dotenv/config";
 import routes from "./src/routes/index.js";
+const path = require("path");
 
 const app = express();
 
@@ -14,6 +15,15 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
+app.use(
+  "public/uploads",
+  express.static(path.join(__dirname, "public/uploads"))
+);
+// console.log(path.join(__dirname, "src/uploads/"));
+// app.use(express.static(path.join(__dirname, "uploads")));
 
 app.use("/api/", routes);
 
