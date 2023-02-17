@@ -1,5 +1,5 @@
-import { body, check } from "express-validator";
-import userModel from "../models/user.model.js";
+const { body, check } = require("express-validator");
+const userModel = require("../models/user.model.js");
 
 const signup = () => {
   return [
@@ -99,4 +99,4 @@ const updateInfo = () => {
   ];
 };
 
-export default { signup, signin, updatePassword, updateInfo };
+module.exports = { signup, signin, updatePassword, updateInfo };

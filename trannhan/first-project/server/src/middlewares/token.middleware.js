@@ -1,6 +1,6 @@
-import jsonwebtoken from "jsonwebtoken";
-import responseHandler from "../handlers/response.handler.js";
-import userModel from "../models/user.model.js";
+const jsonwebtoken = require("jsonwebtoken");
+const responseHandler = require("../handlers/response.handler.js");
+const userModel = require("../models/user.model.js");
 
 const tokenDecode = (req) => {
   try {
@@ -24,4 +24,4 @@ const auth = async (req, res, next) => {
   next();
 };
 
-export default { auth, tokenDecode };
+module.exports = { auth, tokenDecode };

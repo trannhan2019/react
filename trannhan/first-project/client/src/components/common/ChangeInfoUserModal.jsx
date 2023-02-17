@@ -7,41 +7,46 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import userApi from "../../api/modules/user.api";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/features/userSlice";
 
-export default function ChangeInfoUserModal({
-  openInfo,
-  handleCloseInfo,
-  fullName,
-}) {
-  // const [onRequest, setOnRequest] = useState(false);
+export default function ChangeInfoUserModal({ openInfo, handleCloseInfo }) {
+  // const FILE_SIZE = 160 * 1024;
+  const SUPPORTED_FORMATS = [
+    "image/jpg",
+    "image/jpeg",
+    "image/gif",
+    "image/png",
+  ];
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
 
   const form = useFormik({
-    initialValues: { fullName: fullName, photo: {} },
+    initialValues: {
+      fullName: user.fullName,
+      photo: {},
+      birthday: user.birthday,
+    },
     validationSchema: Yup.object({
       fullName: Yup.string()
         .min(7, "Full Name minimum 7 characters")
         .required("Full Name is required"),
       photo: Yup.mixed().test(
-        "type",
-        "Only the following formats are accepted: .jpeg, .jpg, .png",
-        (value) => {
-          return (
-            (value && value.type === "image/jpeg") ||
-            value.type === "image/bmp" ||
-            value.type === "image/png"
-          );
-        }
+        "fileFormat",
+        "Only the following formats are accepted: .jpeg, .jpg, .png, .gif",
+        (value) => value && SUPPORTED_FORMATS.includes(value.type)
       ),
     }),
-    onSubmit: async ({ fullName, photo }) => {
-      const { response, error } = await userApi.updateInfo({ fullName, photo });
+    onSubmit: async (values) => {
+      const { response, error } = await userApi.updateInfo(values);
       if (error) toast.error(error.message);
       if (response) {
         dispatch(setUser(response));
@@ -96,21 +101,35 @@ export default function ChangeInfoUserModal({
                   }
                   helperText={form.touched.fullName && form.errors.fullName}
                 />
-                <Box></Box>
-                {
-                  <Input
-                    type="file"
-                    name="photo"
-                    fullWidth
-                    onChange={(e) =>
-                      form.setFieldValue("photo", e.currentTarget.files[0])
+
+                <Input
+                  type="file"
+                  name="photo"
+                  fullWidth
+                  onChange={(e) =>
+                    form.setFieldValue("photo", e.currentTarget.files[0])
+                  }
+                  color="success"
+                  error={form.touched.photo && form.errors.photo !== undefined}
+                />
+                <Typography color={"error"}>
+                  {form.touched.photo && form.errors.photo}
+                </Typography>
+
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    views={["day", "month", "year"]}
+                    inputFormat="DD/MM/YYYY"
+                    label="Your birthday"
+                    value={form.values.birthday}
+                    onChange={(value) =>
+                      form.setFieldValue("birthday", value, true)
                     }
-                    color="success"
-                    error={
-                      form.touched.photo && form.errors.photo !== undefined
-                    }
+                    renderInput={(params) => (
+                      <TextField name="birthday" {...params} />
+                    )}
                   />
-                }
+                </LocalizationProvider>
 
                 <Button
                   type="submit"

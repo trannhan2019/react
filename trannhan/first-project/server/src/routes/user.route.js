@@ -1,9 +1,9 @@
-import express from "express";
-import userController from "../controllers/user.controller.js";
-import requestHandler from "../handlers/request.handler.js";
-import userValidate from "../handlers/user.validate.js";
-import tokenMiddleware from "../middlewares/token.middleware.js";
-import upload from "../utils/fileUpload.js";
+const express = require("express");
+const userController = require("../controllers/user.controller.js");
+const requestHandler = require("../handlers/request.handler.js");
+const userValidate = require("../handlers/user.validate.js");
+const tokenMiddleware = require("../middlewares/token.middleware.js");
+const upload = require("../utils/fileUpload.js");
 
 const router = express.Router();
 
@@ -40,4 +40,4 @@ router.put(
 
 router.get("/get-user", tokenMiddleware.auth, userController.getUser);
 
-export default router;
+module.exports = router;

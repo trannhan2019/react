@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const userSchema = mongoose.Schema(
   {
@@ -23,6 +23,11 @@ const userSchema = mongoose.Schema(
       required: [true, "Please add a photo"],
       default: "https://i.ibb.co/4pDNDk1/avatar.png",
     },
+    birthday: {
+      type: Date,
+      required: true,
+      default: Date.now(),
+    },
   },
   {
     timestamps: true,
@@ -43,4 +48,4 @@ userSchema.methods.validPassword = async function (password) {
 
 const userModel = mongoose.model("User", userSchema);
 
-export default userModel;
+module.exports = userModel;

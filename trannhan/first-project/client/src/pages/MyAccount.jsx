@@ -9,10 +9,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import dayjs from "dayjs";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ChangeInfoUserModal from "../components/common/ChangeInfoUserModal";
-import ChangeInfoUserModal2 from "../components/common/ChangeInfoUserModal2";
+// import ChangeInfoUserModal2 from "../components/common/ChangeInfoUserModal2";
 import ChangePasswordModal from "../components/common/ChangePasswordModal";
 
 export default function MyAccount() {
@@ -35,7 +36,6 @@ export default function MyAccount() {
       <ChangeInfoUserModal
         openInfo={openInfo}
         handleCloseInfo={handleCloseInfo}
-        fullName={user.fullName}
       />
       <ChangePasswordModal
         openPassword={openPassword}
@@ -48,7 +48,7 @@ export default function MyAccount() {
               <Grid item xs={12} md={4}>
                 <CardMedia
                   component="img"
-                  image={`http://localhost:5000/${user?.photo}`}
+                  image={user?.photo}
                   alt="Live from space album cover"
                 />
               </Grid>
@@ -58,6 +58,9 @@ export default function MyAccount() {
                 >
                   <Typography>Full Name: {user?.fullName}</Typography>
                   <Typography>Email: {user?.email}</Typography>
+                  <Typography>
+                    Birthday: {dayjs(user.birthday).format("DD/MM/YYYY")}
+                  </Typography>
                 </Box>
                 <CardActions>
                   <Stack direction="row" spacing={2}>

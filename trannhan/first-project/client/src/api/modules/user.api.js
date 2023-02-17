@@ -58,7 +58,7 @@ const userApi = {
       return { error };
     }
   },
-  updateInfo: async ({ fullName, photo }) => {
+  updateInfo: async ({ fullName, photo, birthday }) => {
     try {
       const formData = new FormData();
       // const { fullName, photo } = values;
@@ -67,6 +67,7 @@ const userApi = {
       // }
       formData.append("fullName", fullName);
       formData.append("photo", photo);
+      formData.append("birthday", birthday);
       const response = await fileClient.put(userEndpoints.updateInfo, formData);
 
       return { response };

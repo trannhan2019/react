@@ -29,7 +29,7 @@ const notfound = (res) =>
     message: "Resource not found",
   });
 
-export default {
+module.exports = {
   error,
   badrequest,
   ok,

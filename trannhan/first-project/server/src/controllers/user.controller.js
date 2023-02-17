@@ -1,7 +1,7 @@
-import userModel from "../models/user.model.js";
-import jsonwebtoken from "jsonwebtoken";
-import responseHandler from "../handlers/response.handler.js";
-import { unlink } from "fs";
+const userModel = require("../models/user.model.js");
+const jsonwebtoken = require("jsonwebtoken");
+const responseHandler = require("../handlers/response.handler.js");
+const fs = require("fs");
 
 const signup = async (req, res) => {
   try {
@@ -83,19 +83,26 @@ const updatePassword = async (req, res) => {
 
 const updateInfo = async (req, res) => {
   try {
-    const user = await userModel.findById(req.user.id).select("fullName photo");
+    const user = await userModel
+      .findById(req.user.id)
+      .select("fullName photo birthday");
     if (!user) return responseHandler.unauthorize(res);
-    if (req.file && user.photo) {
-      unlink(`public/uploads/users/${user.photo}`, (err) => {
-        if (err) throw err;
-      });
-    }
+    // if (req.file && user.photo) {
+    //   // fs.unlink(`public/uploads/users/${user.photo}`, (err) => {
+    //   //   if (err) throw err;
+    //   // });
+    //   fs.unlink(`${user.photo}`, (err) => {
+    //     if (err) throw err;
+    //   });
+    // }
     //set new fullname and new photo
     user.fullName = req.body.fullName;
     if (req.file)
-      // user.photo = `${req.protocol}://${req.get("host")}/${req.file.filename}`;
-      user.photo = `${req.file.filename}`;
-
+      user.photo = `${req.protocol}://${req.get("host")}/public/uploads/users/${
+        req.file.filename
+      }`;
+    // user.photo = `${req.file.filename}`;
+    user.birthday = req.body.birthday;
     await user.save();
     //responseHandler.ok(res);
     const token = jsonwebtoken.sign(
@@ -113,4 +120,4 @@ const updateInfo = async (req, res) => {
   }
 };
 
-export default { signup, signin, getUser, updatePassword, updateInfo };
+module.exports = { signup, signin, getUser, updatePassword, updateInfo };

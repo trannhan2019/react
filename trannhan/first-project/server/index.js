@@ -1,11 +1,9 @@
-import express from "express";
-import cors from "cors";
-import http from "http";
-import mongoose from "mongoose";
-import "dotenv/config";
-import routes from "./src/routes/index.js";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
+const express = require("express");
+const cors = require("cors");
+const http = require("http");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv").config();
+const routes = require("./src/routes/index.js");
 
 const app = express();
 
@@ -17,13 +15,11 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 //https://expressjs.com/en/starter/static-files.html
-app.use(express.static(path.join(__dirname, "public/uploads/users")));
-// app.use("/static", express.static("public/uploads/users"));
+// app.use(express.static(path.join(__dirname, "public/uploads/users")));
+app.use("/public/uploads/users", express.static("public/uploads/users"));
 
-app.use("/api/", routes);
+app.use("/api", routes);
 
 const port = process.env.PORT || 5000;
 
