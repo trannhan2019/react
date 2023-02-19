@@ -8,6 +8,8 @@ const userEndpoints = {
   getUser: "user/get-user",
   updatePassword: "user/update-password",
   updateInfo: "user/update-info",
+  getUserList: "user",
+  forgot: "user/forgot",
 };
 
 const userApi = {
@@ -71,6 +73,23 @@ const userApi = {
       const response = await fileClient.put(userEndpoints.updateInfo, formData);
 
       return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+  getUserList: async (params) => {
+    try {
+      const response = await privateClient.get(userEndpoints.getUserList, {
+        params,
+      });
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+  forgot: async () => {
+    try {
+      //return { response };
     } catch (error) {
       return { error };
     }

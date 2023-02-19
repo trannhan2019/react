@@ -2,12 +2,9 @@ import fileClient from "../client/file.client";
 import publicClient from "../client/public.client";
 
 const testApi = {
-  test: async (data) => {
+  test: async (params) => {
     try {
-      //   const formData = new FormData();
-      //   formData.append("birthday", data.birthday);
-      //   formData.append("fullName", data.fullName);
-      const response = await publicClient.post("/test", data);
+      const response = await publicClient.get("/user", { params });
       return { response };
     } catch (error) {
       return { error };

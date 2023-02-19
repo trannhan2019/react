@@ -16,6 +16,13 @@ export default function SignIn() {
   const [isLoginRequest, setIsLoginRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
+  //Forgot Password
+  const [open, setOpen] = useState(false);
+  const handleClose = (event, reason) => {
+    if (reason && reason == "backdropClick") return;
+    setOpen(false);
+  };
+
   const signinForm = useFormik({
     initialValues: {
       email: "",
@@ -93,7 +100,7 @@ export default function SignIn() {
       </LoadingButton>
       <Grid container>
         <Grid item xs>
-          <Link href="#" variant="body2">
+          <Link variant="body2" component={RouterLink} to="/forgot">
             Forgot password?
           </Link>
         </Grid>

@@ -14,6 +14,9 @@ import Dashboard from "./pages/Dashboard";
 import AuthProtect from "./components/common/AuthProtect";
 import NotFound from "./pages/NotFound";
 import MyAccount from "./pages/MyAccount";
+import TestFunction from "./pages/TestFunction";
+import UsersManager from "./pages/UsersManager";
+import Forgot from "./pages/Forgot";
 
 function App() {
   //ĐÃ SỬ DỤNG PERSIT-REDUX
@@ -61,6 +64,14 @@ function App() {
             }
           />
           <Route
+            path="/forgot"
+            element={
+              <AuthLayout heading="Forgot Password">
+                <Forgot />
+              </AuthLayout>
+            }
+          />
+          <Route
             path="/admin"
             element={
               <AuthProtect>
@@ -70,7 +81,9 @@ function App() {
           >
             <Route index element={<Dashboard />} />
             <Route path="my-account" element={<MyAccount />} />
+            <Route path="users" element={<UsersManager />} />
           </Route>
+          <Route path="test" element={<TestFunction />} />
           {/* 404 Page */}
           <Route path="*" element={<NotFound />} />
         </Routes>

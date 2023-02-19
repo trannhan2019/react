@@ -40,4 +40,6 @@ router.put(
 
 router.get("/get-user", tokenMiddleware.auth, userController.getUser);
 
+router.get("/", tokenMiddleware.auth, userController.getList);
+
 module.exports = router;

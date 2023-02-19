@@ -110,7 +110,7 @@ const updateInfo = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "24h" }
     );
-    responseHandler.created(res, {
+    responseHandler.ok(res, {
       token,
       ...user._doc,
       id: user._id,
@@ -120,4 +120,45 @@ const updateInfo = async (req, res) => {
   }
 };
 
-module.exports = { signup, signin, getUser, updatePassword, updateInfo };
+const getList = async (req, res) => {
+  try {
+    const { search, page, limit } = req.query;
+    let query = {};
+    if (search) query.fullName = { $regex: new RegExp(search), $options: "i" };
+    const options = {
+      page: +page || 1,
+      limit: +limit || 5,
+    };
+    const userList = await userModel.paginate(query, options);
+    responseHandler.ok(res, userList);
+  } catch (error) {
+    responseHandler.error(res);
+    console.log(error.message);
+  }
+};
+
+//tu get paginate ko su dung thu vien
+const getList2 = async (req, res) => {
+  try {
+    const page = +req.query.page || 1;
+    const limit = +req.query.limit || 5;
+    const userList = await userModel
+      .find()
+      .skip(limit * page - limit)
+      .limit(limit);
+    responseHandler.ok(res, { docs: userList, totalDocs: userList.length });
+  } catch (error) {
+    responseHandler.error(res);
+    console.log(error.message);
+  }
+};
+
+module.exports = {
+  signup,
+  signin,
+  getUser,
+  updatePassword,
+  updateInfo,
+  getList,
+  getList2,
+};
