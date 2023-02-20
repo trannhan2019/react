@@ -1,7 +1,7 @@
 const userModel = require("../models/user.model.js");
 const jsonwebtoken = require("jsonwebtoken");
 const responseHandler = require("../handlers/response.handler.js");
-const fs = require("fs");
+// const fs = require("fs");
 
 const signup = async (req, res) => {
   try {
@@ -40,14 +40,58 @@ const signin = async (req, res) => {
     const token = jsonwebtoken.sign(
       { data: user._id },
       process.env.JWT_SECRET,
+      { expiresIn: "30s" }
+    );
+    const refreshToken = jsonwebtoken.sign(
+      { data: user._id },
+      process.env.JWT_SECRET,
       { expiresIn: "24h" }
     );
+    //luu refreshToken vao db
+    user.refreshToken = refreshToken;
+    await user.save();
+    // Lưu refresh token vào cookie
+    res.cookie("refreshToken", refreshToken, {
+      // path: "/",
+      httpOnly: true,
+      expires: new Date(Date.now() + 1000 * 86400), // 1 day
+      sameSite: "none",
+      secure: true,
+    });
     responseHandler.created(res, {
       token,
       ...user._doc,
       id: user._id,
     });
   } catch (err) {
+    responseHandler.error(res);
+  }
+};
+
+const refreshToken = async (req, res) => {
+  try {
+    // Lấy token từ cookies
+    const cookie = req.cookies;
+    console.log(cookie);
+    // // Check xem có token hay không
+    // if (!cookie && !cookie.refreshToken)
+    //   return responseHandler.unauthorize(res);
+    // // Check token có hợp lệ hay không
+    // const rs = jsonwebtoken.verify(cookie.refreshToken, process.env.JWT_SECRET);
+
+    // const user = await userModel.findOne({
+    //   _id: rs.data,
+    //   refreshToken: cookie.refreshToken,
+    // });
+    // console.log(user);
+    // if (!user) return responseHandler.unauthorize(res);
+    // responseHandler.ok(res, {
+    //   token: jsonwebtoken.sign({ data: rs.data }, process.env.JWT_SECRET, {
+    //     expiresIn: "30s",
+    //   }),
+    // });
+  } catch (error) {
+    console.log(error);
     responseHandler.error(res);
   }
 };
@@ -161,4 +205,5 @@ module.exports = {
   updateInfo,
   getList,
   getList2,
+  refreshToken,
 };

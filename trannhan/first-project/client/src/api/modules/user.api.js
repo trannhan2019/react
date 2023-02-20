@@ -1,6 +1,7 @@
 import publicClient from "../client/public.client";
 import privateClient from "../client/private.client";
 import fileClient from "../client/file.client";
+import sessionClient from "../client/session.Client";
 
 const userEndpoints = {
   signin: "user/signin",
@@ -10,6 +11,7 @@ const userEndpoints = {
   updateInfo: "user/update-info",
   getUserList: "user",
   forgot: "user/forgot",
+  refresh: "user/refresh",
 };
 
 const userApi = {
@@ -33,6 +35,19 @@ const userApi = {
         email,
         password,
       });
+      return { response };
+    } catch (error) {
+      console.log(error);
+      return { error };
+    }
+  },
+  refresh: async () => {
+    try {
+      const response = await publicClient.post(
+        userEndpoints.refresh,
+        {},
+        { withCredentials: true }
+      );
       return { response };
     } catch (error) {
       console.log(error);

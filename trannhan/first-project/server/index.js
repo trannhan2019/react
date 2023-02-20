@@ -4,14 +4,17 @@ const http = require("http");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const routes = require("./src/routes/index.js");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
 app.use(
   cors({
     origin: `${process.env.CLIENT_URL}`,
+    credentials: true,
   })
 );
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

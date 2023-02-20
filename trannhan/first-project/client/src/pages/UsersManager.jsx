@@ -36,8 +36,8 @@ export default function UsersManager() {
         limit: rowsPerPage,
       });
       if (response) {
-        setUsers(response.docs);
-        setCount(response.totalDocs);
+        setUsers(response.data.docs);
+        setCount(response.data.totalDocs);
       }
       if (error) toast.error(error.message);
     }

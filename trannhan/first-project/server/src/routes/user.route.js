@@ -42,4 +42,6 @@ router.get("/get-user", tokenMiddleware.auth, userController.getUser);
 
 router.get("/", tokenMiddleware.auth, userController.getList);
 
+router.post("/refresh", userController.refreshToken);
+
 module.exports = router;
