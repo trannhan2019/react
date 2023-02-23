@@ -8,11 +8,11 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import postImage2 from "../../assets/images/image2.jpg";
-import postImage3 from "../../assets/images/image3.jpg";
-import postImage4 from "../../assets/images/image4.jpg";
+import postImage2 from "../../../assets/images/image2.jpg";
+import postImage3 from "../../../assets/images/image3.jpg";
+import postImage4 from "../../../assets/images/image4.jpg";
 import React from "react";
-import Card from "../blog/card/Card";
+import Card from "../../blog/card/Card";
 
 export default function Rightbar() {
   return (

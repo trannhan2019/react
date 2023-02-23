@@ -1,6 +1,8 @@
 import {
   AppBar,
   Box,
+  Divider,
+  Drawer,
   IconButton,
   Input,
   Link,
@@ -8,11 +10,12 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Stack,
   Toolbar,
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import React from "react";
+import React, { useState } from "react";
 
 const MenuItems = [
   { Name: "Home", Link: "#" },
@@ -48,6 +51,8 @@ const MenuList = () => {
 };
 
 export default function NavBar() {
+  const [open, setOpen] = useState(false);
+
   return (
     <AppBar position="sticky" color="default">
       <Toolbar>
@@ -85,11 +90,21 @@ export default function NavBar() {
           color="inherit"
           aria-label="open drawer"
           sx={{ display: { sm: "block", md: "none" } }}
+          onClick={() => setOpen(true)}
         >
           <MenuIcon />
         </IconButton>
         {/* btn menu */}
       </Toolbar>
+      {/* right draw */}
+      <Drawer open={open} onClose={() => setOpen(false)} anchor="right">
+        <Stack padding={2} gap={2}>
+          <MenuList />
+          <Divider />
+          <Search />
+        </Stack>
+      </Drawer>
+      {/* right draw */}
     </AppBar>
   );
 }

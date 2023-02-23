@@ -1,7 +1,7 @@
 import { Box, Container, Stack } from "@mui/material";
 import Hero from "../components/blog/hero/Hero";
 import Categories from "../components/blog/category/Categories";
-import Rightbar from "../components/rightbar/Rightbar";
+import Rightbar from "../components/blog/rightbar/Rightbar";
 import Recents from "../components/blog/recents/Recents";
 
 function ResponsiveBlog() {
