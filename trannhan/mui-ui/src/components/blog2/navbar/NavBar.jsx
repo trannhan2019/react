@@ -54,57 +54,77 @@ export default function NavBar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <AppBar position="sticky" color="default">
-      <Toolbar>
-        {/* logo */}
-        <Box flex={2}>
-          <Link href="#" sx={{ textDecoration: "none" }}>
-            <Typography
-              sx={{
-                fontFamily: "Splash , cursive",
-                textAlign: { sm: "center", md: "left" },
-                fontWeight: "bold",
-              }}
-              color={"tomato"}
-              variant="h4"
-            >
-              CodingsTrade
-            </Typography>
-          </Link>
-        </Box>
-        {/* logo */}
-        {/* menu */}
-        <Box flex={3} sx={{ display: { sm: "none", md: "flex" } }}>
-          <MenuList />
-        </Box>
-        {/* menu */}
-        {/* search */}
-        <Box flex={2} sx={{ display: { sm: "none", md: "flex" } }}>
-          <Search />
-        </Box>
-        {/* search */}
-        {/* btn menu */}
-        <IconButton
-          size="large"
-          edge="end"
-          color="inherit"
-          aria-label="open drawer"
-          sx={{ display: { sm: "block", md: "none" } }}
-          onClick={() => setOpen(true)}
+    <>
+      <AppBar position="sticky" color="default">
+        <Toolbar>
+          {/* logo */}
+          <Box flex={2}>
+            <Link href="#" sx={{ textDecoration: "none" }}>
+              <Typography
+                sx={{
+                  fontFamily: "Splash , cursive",
+                  textAlign: { sm: "center", md: "left" },
+                  fontWeight: "bold",
+                }}
+                color={"tomato"}
+                variant="h4"
+              >
+                CodingsTrade
+              </Typography>
+            </Link>
+          </Box>
+          {/* logo */}
+          {/* menu */}
+          <Box flex={3} sx={{ display: { xs: "none", md: "flex" } }}>
+            <MenuList />
+          </Box>
+          {/* menu */}
+          {/* search */}
+          <Box flex={2} sx={{ display: { xs: "none", md: "flex" } }}>
+            <Search />
+          </Box>
+          {/* search */}
+          {/* btn menu */}
+          <IconButton
+            size="large"
+            edge="end"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ display: { xs: "block", md: "none" } }}
+            onClick={() => setOpen(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+          {/* btn menu */}
+        </Toolbar>
+        {/* right draw */}
+        <Drawer open={open} onClose={() => setOpen(false)} anchor="right">
+          <Stack padding={2} gap={2}>
+            <MenuList />
+            <Divider />
+            <Search />
+          </Stack>
+        </Drawer>
+        {/* right draw */}
+      </AppBar>
+      <Stack
+        paddingY={2}
+        direction={{ md: "row" }}
+        justifyContent="center"
+        alignItems={"center"}
+      >
+        <Typography variant="h5" align="center" mr={{ md: 1 }}>
+          Simple Recipes made for Coders!
+        </Typography>
+        <Typography
+          variant="h5"
+          align="center"
+          fontFamily={"Splash , cursive"}
+          color={"tomato"}
         >
-          <MenuIcon />
-        </IconButton>
-        {/* btn menu */}
-      </Toolbar>
-      {/* right draw */}
-      <Drawer open={open} onClose={() => setOpen(false)} anchor="right">
-        <Stack padding={2} gap={2}>
-          <MenuList />
-          <Divider />
-          <Search />
-        </Stack>
-      </Drawer>
-      {/* right draw */}
-    </AppBar>
+          Simple Recipes made for Coders!
+        </Typography>
+      </Stack>
+    </>
   );
 }
