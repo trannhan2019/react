@@ -1,0 +1,18 @@
+$main-bg: #fff;
+$main-color: #4267b2;
+
+$txt-main-color: #000;
+$txt-second-color: #8d8d8d;
+$txt-white: #fff;
+
+$colors: (
+    "blue": #4267b2,
+    "orange": #fbb96b,
+    "pink": #fe7e73,
+    "white": #fff,
+    "black": #000,
+    "main": $main-color,
+);
+
+$mobile-width: 600px;
+$tablet-width: 1024px;

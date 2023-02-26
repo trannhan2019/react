@@ -1,0 +1,24 @@
+.fui-header {
+    @include flex(center, center);
+    gap: 40px;
+    background-color: $main-bg;
+    padding: 10px 0;
+    .wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            img {
+                height: 50px;
+            }
+            .logo__name {
+                font-size: 20px;
+                font-weight: 700;
+                color: $txt-main-color;
+            }
+        }
+    }
+}
