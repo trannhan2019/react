@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Chip,
   Container,
   FormControl,
   Grid,
@@ -10,19 +11,31 @@ import {
   Select,
   Stack,
   styled,
-  TextField,
+  Typography,
 } from "@mui/material";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 
 const CsInput = styled(Input)({
-  "&.MuiInput-root:before": { borderBottom: "none" },
+  "&.MuiInput-root:before": { border: "none" },
+  "&.MuiInputBase-root:hover": { border: "none" },
 });
 const CsSelect = styled(Select)({
-  "&.MuiInput-root:before": { borderBottom: "none" },
+  "&.MuiInput-root:before": { border: "none" },
   "&. MuiSelect-select": { padding: "-1px 8px 1px" },
 });
+
+const dataDexuat = [
+  "Reactjs",
+  "VueJS",
+  "Angular",
+  "Design",
+  ".NET",
+  "PHP",
+  "Java",
+  "Mobile",
+];
 
 const Fillter = () => {
   return (
@@ -76,7 +89,10 @@ const Fillter = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Stack></Stack>
+        <Stack mt={4} direction={"row"} alignItems="center" columnGap={1}>
+          <Typography>Đề xuất</Typography>
+          {dataDexuat.map(item=>(<Chip key={item} label={item}/>))}
+        </Stack>
       </Container>
     </Box>
   );

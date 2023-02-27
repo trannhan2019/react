@@ -10,6 +10,7 @@ const Hero = () => {
         backgroundImage: `url(${HeroImg})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "auto",
+        backgroundPosition:'center'
       }}
     />
   );
